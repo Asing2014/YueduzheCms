@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="config.mybatis.ContentMapper">
+  <select id="selectContentById" resultType="Content">
+    select * from Content where id = #{id}
+  </select>
+  <insert id="addContent" parameterType="Content">
+  insert into Content(title,description,image_url,url,content,type,state,user)
+  values(#{title},#{desc},#{image_url},#{url},#{content},#{type},#{state},#{user});
+  </insert>
+</mapper>
