@@ -8,6 +8,7 @@ package bean;
  *
  */
 public class Content {
+	private String id;//主键
 	private String desc;//摘要
 	private String image_url;//图片摘要链接
 	private String url;//内容url。
@@ -72,5 +73,11 @@ public class Content {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

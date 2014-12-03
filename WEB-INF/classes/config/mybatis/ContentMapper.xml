@@ -10,4 +10,11 @@
   insert into Content(title,description,image_url,url,content,type,state,user)
   values(#{title},#{desc},#{image_url},#{url},#{content},#{type},#{state},#{user});
   </insert>
+  <delete id="deleteContentById">
+  	delete from Content where id = #{id}
+  </delete>
+  <update id="updateContentById" parameterType="Content">
+  update Content set title=#{title},description = #{desc},image_url = #{image_url},url = #{url},content=#{content},type=#{type},state=#{state},user=#{user}
+  where id=#{id};
+  </update>
 </mapper>

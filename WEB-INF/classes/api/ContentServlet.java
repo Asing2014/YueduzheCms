@@ -51,6 +51,49 @@ public class ContentServlet extends HttpServlet {
 			  session.close();
 			}
 		}
+		//删除
+		if("delete".equalsIgnoreCase(method)){
+			//查询
+			String id = request.getParameter("id");
+			String resource = "config/mybatis/db.xml";
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			SqlSession session = sqlSessionFactory.openSession();
+			try {
+			  int result = session.delete("config.mybatis.ContentMapper.deleteContentById", id);
+			  session.commit();
+			  response.getWriter().write(result+"");
+			} finally {
+			  session.close();
+			}
+		}
+		//更新
+		if("update".equalsIgnoreCase(method)){
+			//查询
+			String c = request.getParameter("c");
+			JSONObject object = JSONObject.fromObject(c);
+			Content content = new Content();
+			content.setContent(object.getString("content"));
+			content.setDesc(object.getString("description"));
+			content.setImage_url(object.getString("image_url"));
+			content.setState(object.getString("state"));
+			content.setTitle(object.getString("title"));
+			content.setType(object.getString("type"));
+			content.setUrl(object.getString("url"));
+			content.setUser(object.getString("user"));
+			content.setId(object.getString("id"));
+			String resource = "config/mybatis/db.xml";
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			SqlSession session = sqlSessionFactory.openSession();
+			try {
+			  int result = session.update("config.mybatis.ContentMapper.updateContentById",content );
+			  session.commit();
+			  response.getWriter().write(result+"");
+			} finally {
+			  session.close();
+			}
+		}
 		if("add".equalsIgnoreCase(method)){
 			//增加
 			String c = request.getParameter("c");
